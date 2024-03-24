@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Text, ScrollView } from '..';
 import Story from '.';
 
-const StoryList = () => {
+const StoryList = ({ stories }) => {
     return (
         <Box fluid height='300px'>
             <Box row fluid justify='space-between' hasPadding height='60px'>
@@ -16,7 +16,7 @@ const StoryList = () => {
             <ScrollView horizontal style={{
                 paddingLeft: 20,
             }}>
-                {Array.from(Array(10))?.map(item => <Story/>)}
+                {stories?.map(story => <Story story={story}/>)}
             </ScrollView>
         </Box>
     )

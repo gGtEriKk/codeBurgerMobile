@@ -35,7 +35,7 @@ const CustomDrawerComponent = (props) => {
 const DrawerMenu = () => {
     return (
         <Drawer.Navigator
-            initialRouteName='Orders'
+            initialRouteName='Marketplace'
             drawerContent={
                 props => <CustomDrawerComponent {...props} />
             }

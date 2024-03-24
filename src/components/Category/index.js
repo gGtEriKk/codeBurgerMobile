@@ -5,7 +5,7 @@ import { Touchable, Cover, Title, Text, Spacer, Box } from '..'
 import { colors } from '../../styles/theme.json'
 import utils from '../../utils'
 
-const CategoryComponent = ({ title, description }) => {
+const CategoryComponent = ({ category }) => {
     const { navigate } = useNavigation()
 
     return (
@@ -14,9 +14,9 @@ const CategoryComponent = ({ title, description }) => {
             height='200px'
             radius='10px'
             spacing='10px 0'
-            onPress={() => navigate('Category')}>
+            onPress={() => navigate('Category', { category })}>
             <Cover
-                image='https://topmovies.com.br/wp-content/uploads/2023/08/One-Piece-Criador-expressa-a-importancia-de-um-elenco-feminino-860x430.jpg'
+                image={category?.cover}
                 width='100%'
                 height='100%'>
                 <Box
@@ -25,9 +25,9 @@ const CategoryComponent = ({ title, description }) => {
                     justify='center'
                     hasPadding
                     background={utils.toAlpha(colors.black, 70)}>
-                    <Title variant='big' bold color='light'>{title}</Title>
+                    <Title variant='big' bold color='light'>{category?.title}</Title>
                     <Spacer />
-                    <Text color='light'>{description}</Text>
+                    <Text color='light'>{category?.items} Items</Text>
                 </Box>
             </Cover>
         </Touchable>

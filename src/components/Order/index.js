@@ -1,11 +1,29 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
+import moment from 'moment'
 
 import { Title, Box, Spacer, Text } from '..'
 import { colors } from '../../styles/theme.json'
 import utils from '../../utils'
 
-const Order = () => {
+const Order = ({ order }) => {
+    const stepEnum = {
+        waiting: {
+            icon: 'clock',
+            color: 'warning'
+        },
+        delivered: {
+            icon: 'check',
+            color: 'secondary'
+        },
+        canceled: {
+            icon: 'close',
+            color: 'danger'
+        }
+    }
+
+    const stepData = stepEnum[order?.step]
+
     return (
         <>
             <Box radius='5px' fluid style={{
@@ -14,8 +32,14 @@ const Order = () => {
                 borderColor: utils.toAlpha(colors.muted, 40)
             }}>
                 <Box row hasPadding fluid justify='space-between'>
-                    <Text color='warning' variant='small'><Icon name='clock' />IN PROGRESS</Text>
-                    <Text color='gray50' variant='small'>May 13, 2016 5:08 PM</Text>
+                    <Text
+                        color={stepData?.color}
+                        variant='small'>
+                        <Icon name={stepData?.icon} color={colors[stepData?.color]} /> {order?.step?.toUpperCase()}
+                    </Text>
+                    <Text color='gray50' variant='small'>
+                        {moment(order?.createdAt).format('DD/MM/YY HH:mm')}
+                    </Text>
                 </Box>
                 <Box fluid hasPadding style={{
                     borderStyle: 'solid',
@@ -23,21 +47,21 @@ const Order = () => {
                     borderTopWidth: 1,
                     borderColor: utils.toAlpha(colors.muted, 40)
                 }}>
-                    <Title bold>Order №1947034</Title>
-                    <Text>Tracking number:   <Text color='dark'>IW3475453455</Text></Text>
+                    <Title bold>Order №{order?.orderNumber}</Title>
+                    <Text>Tracking number:   <Text color='dark'>{order?.trackingNumber}</Text></Text>
                 </Box>
                 <Box row hasPadding>
                     <Box>
                         <Text variant='small'>VALUE OF ITEMS</Text>
-                        <Text color='dark'>$80.58</Text>
+                        <Text color='dark'>{order?.totalValue}</Text>
                     </Box>
                     <Box>
                         <Text variant='small'>QUANTITY</Text>
-                        <Text color='dark'>20 pairs</Text>
+                        <Text color='dark'>{order?.totalItems}</Text>
                     </Box>
                 </Box>
             </Box >
-            <Spacer size='20px'/>
+            <Spacer size='20px' />
         </>
     )
 }

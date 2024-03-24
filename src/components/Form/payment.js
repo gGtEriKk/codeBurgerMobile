@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import SegmentedPicker from 'react-native-segmented-picker';
+import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 import { Text, Title, Box, Spacer, Input, Touchable } from '..'
 
@@ -21,23 +22,24 @@ const PaymentForm = ({ onChange = creditCard => { } }) => {
         <>
             <SegmentedPicker
                 ref={picker}
-                onConfirm={(data) =>
-                    setData({...data, valid_date: `${data.month}/${data.year}`})}
-            options={[
-                {
-                    key: 'month',
-                    items: [
-                        { label: 'Option 1', value: 'option_1' },
-                        { label: 'Option 2', value: 'option_2' },
-                    ],
-                },
-                {
-                    key: 'year',
-                    items: [
-                        { label: 'Option 3', value: 'option_3' },
-                    ],
-                },
-            ]}
+                onConfirm={(validDate) =>
+                    setData({ ...data, valid_date: `${validDate.month}/${validDate.year}` })}
+                options={[
+                    {
+                        key: 'month',
+                        items: [
+                            { label: 'January', value: '01' },
+                            { label: 'February', value: '02' },
+                        ],
+                    },
+                    {
+                        key: 'year',
+                        items: [
+                            { label: '2027', value: '2027' },
+                            { label: '2028', value: '2028' }
+                        ],
+                    },
+                ]}
             />
             <Box>
                 <Title variant='small'>Select and enter your payment details</Title>
@@ -50,9 +52,9 @@ const PaymentForm = ({ onChange = creditCard => { } }) => {
                     onChangeText={holder_name => setData({ ...data, holder_name })} />
                 <Spacer size='20px' />
                 <Input
-                    placeholder='Credit Card Number'
-                    value={data.credit_card}
-                    onChangeText={credit_card => setData({ ...data, credit_card })} />
+                placeholder='Credit Card Number'
+                value={data.credit_card}
+                onChangeText={credit_card => setData({ ...data, credit_card })} />
                 <Spacer size='20px' />
                 <Touchable
                     onPress={() => picker.current.show(picker)}
@@ -60,7 +62,8 @@ const PaymentForm = ({ onChange = creditCard => { } }) => {
                     <Input
                         pointerEvents='none'
                         editable={false}
-                        placeholder='03/2029' />
+                        placeholder='00/0000'
+                        value={data.valid_date} />
                 </Touchable>
                 <Spacer size='20px' />
                 <Box row align='center'>

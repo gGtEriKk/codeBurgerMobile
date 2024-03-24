@@ -1,8 +1,11 @@
 import React from 'react'
-import { Cover, Text, Touchable, Box } from '..';
+import moment from 'moment';
+
 import { colors } from '../../styles/theme.json'
 
-const Story = () => {
+import { Cover, Text, Touchable, Box } from '..';
+
+const Story = ({ story }) => {
     return (
         <Touchable
             onPress={() => alert('View Story')}
@@ -14,12 +17,12 @@ const Story = () => {
             <Cover
                 width='100%'
                 height='100%'
-                image='https://e0.pxfuel.com/wallpapers/300/198/desktop-wallpaper-one-piece-top-ultra-one-piece-background-one-piece-season-1-thumbnail.jpg'>
+                image={story?.cover}>
                 <Box justify='space-between'
                     fluid
                     hasPadding
                     background={`${colors.dark}80`}>
-                    <Cover image='https://sm.ign.com/ign_br/screenshot/default/blob_hbbk.jpg'
+                    <Cover image={story?.owner?.photo}
                         circle
                         border={`1px solid ${colors.warning}`}
                         height='40px' 
@@ -27,8 +30,8 @@ const Story = () => {
                     <Box
                         height='40px'
                         justify='flex-end'>
-                        <Text color='light' bold>luffyGear5</Text>
-                        <Text color='light' variant='small'>2 min ago</Text>
+                        <Text color='light' bold>{story?.owner?.username}</Text>
+                        <Text color='light' variant='small'>{moment(story?.createdAt).fromNow()}</Text>
                     </Box>
                 </Box>
             </Cover>

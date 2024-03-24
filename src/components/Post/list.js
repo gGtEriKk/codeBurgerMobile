@@ -2,12 +2,12 @@ import React from 'react'
 import { Box, ScrollView } from '..';
 import Post from '.';
 
-const PostList = () => {
+const PostList = ({ posts }) => {
     return (
         <ScrollView fluid>
             <Box>
-                {Array.from(Array(25))?.map(item => (
-                    <Post/>
+                {posts?.map(post => (
+                    <Post post={post}/>
                 ))}
             </Box>
         </ScrollView>

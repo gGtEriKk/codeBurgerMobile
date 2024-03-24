@@ -3,12 +3,12 @@ import React from 'react'
 import { ScrollView, Spacer } from '..'
 import Order from '.'
 
-const OrderList = () => {
+const OrderList = ({ orders }) => {
     return (
         <>
             <ScrollView background='light' fluid hasPadding>
-                {Array.from(Array(4))?.map(ord => (
-                    <Order />
+                {orders?.map(order => (
+                    <Order order={order}/>
                 ))}
                 <Spacer size='20px'/>
             </ScrollView>

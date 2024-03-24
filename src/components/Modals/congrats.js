@@ -1,8 +1,11 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 import { Box, Button, Cover, Spacer, Text, Title } from '..'
 
 const CongratsModal = () => {
+    const { navigate } = useNavigation()
+
     return (
         <Box
             style={{
@@ -28,7 +31,7 @@ const CongratsModal = () => {
                     and should arrive shortly
                 </Text>
             </Box>
-            <Button block>
+            <Button block onPress={() => navigate('Orders')}>
                 <Text color='light'>Track your order</Text>
             </Button>
         </Box>
